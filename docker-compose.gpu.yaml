@@ -1,0 +1,21 @@
+version: "3"
+services:
+  kaggle-env:
+    container_name: kaggle-gpu-env
+    build:
+      context: .
+      args:
+        BASE_IMAGE: gcr.io/kaggle-gpu-images/python:latest
+    volumes:
+      - ./notebook:/workspace/notebook
+      - ./kaggle_credentials/kaggle.json:/root/.kaggle/kaggle.json
+    ports:
+      - 8888:8888
+    tty: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]

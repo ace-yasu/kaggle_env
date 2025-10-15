@@ -1,0 +1,14 @@
+version: "3"
+services:
+  kaggle-env:
+    container_name: kaggle-cpu-env
+    build:
+      context: .
+      args:
+        BASE_IMAGE: gcr.io/kaggle-images/python:latest
+    volumes:
+      - ./notebook:/workspace/notebook
+      - ./kaggle_credentials/kaggle.json:/root/.kaggle/kaggle.json
+    ports:
+      - 8888:8888
+    tty: true
