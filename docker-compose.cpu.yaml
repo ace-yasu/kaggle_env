@@ -6,8 +6,10 @@ services:
       context: .
       args:
         BASE_IMAGE: gcr.io/kaggle-images/python:latest
+    working_dir: /root
     volumes:
-      - ./notebook:/workspace/notebook
+      - ./notebook:/root/notebook
+      - ./data:/root/data
       - ./kaggle_credentials/kaggle.json:/root/.kaggle/kaggle.json
     ports:
       - 8888:8888
